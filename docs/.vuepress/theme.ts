@@ -51,7 +51,7 @@ export default hopeTheme({
   // sidebar
   sidebar: sidebar,
   // 侧边栏排序规则
-  // sidebarSorter: ['readme', 'order', 'title'],
+  sidebarSorter: ['readme', 'order', 'title'],
 
   // copyright 默认为 Copyright © <作者>
   copyright: `Copyright © 2023-present <a href="https://newzone.top/" target="_blank" rel="noopener noreferrer">LearnData 开源笔记</a>`,
@@ -65,7 +65,7 @@ export default hopeTheme({
   // 主题功能选项：https://theme-hope.vuejs.press/zh/config/theme/feature.html
   blog: {
     articleInfo: ["Date", "PageView", "Category", "Tag", "ReadingTime"],
-    name: "清顺",
+    name: "涂炜冬",
     avatar: "/avatar_self.webp",
     description: "迷信新工具，热衷于研究开源软件、心理学理论，定期分享探索成果",
     intro: "/intro.html",
