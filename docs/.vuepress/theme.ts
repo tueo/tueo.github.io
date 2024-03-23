@@ -29,7 +29,7 @@ export default hopeTheme({
   fullscreen: true,
 
   // 默认为 GitHub. 同时也可以是一个完整的 URL
-  repo: "rockbenben/LearnData",
+  repo: "tueo/tueo.github.io",
   // 自定义仓库链接文字。默认从 `repo` 中自动推断为 "GitHub" / "GitLab" / "Gitee" / "Bitbucket" 其中之一，或是 "Source"。
   repoLabel: "GitHub",
   // 是否在导航栏内显示仓库链接，默认为 `true`
@@ -67,17 +67,11 @@ export default hopeTheme({
     articleInfo: ["Date", "PageView", "Category", "Tag", "ReadingTime"],
     name: "涂炜冬",
     avatar: "/avatar_self.webp",
-    description: "迷信新工具，热衷于研究开源软件、心理学理论，定期分享探索成果",
+    description: "zigbee, LTE",
     intro: "/intro.html",
     roundAvatar: true,
     medias: {
-      GitHub: "https://github.com/rockbenben",
-      Zhihu: "https://www.zhihu.com/people/qingwhat",
-      少数派: ["https://sspai.com/u/zqj05i4v/posts", "./docs/.vuepress/icons/sspai.svg"],
-      Wechat: "https://img.newzone.top/wechat.svg",
-      Email: "mailto:learndata@newzone.top",
-      Discord: "https://discord.gg/PZTQfJ4GjX",
-      RSS: "/rss.xml",
+      GitHub: "https://github.com/tueo",
     },
   },
 

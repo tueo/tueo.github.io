@@ -30,12 +30,6 @@ export default navbar([
     ],
   },
   {
-    text: "生活",
-    icon: "emmet",
-    prefix: "/family/",
-    children: ["Diet", "Coupon"],
-  },
-  {
     text: "工具",
     icon: "tool",
     children: [

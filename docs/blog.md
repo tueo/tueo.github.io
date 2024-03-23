@@ -3,11 +3,11 @@
 home: true
 layout: BlogHome
 icon: home
-title: 互联网小白
+title: 嵌入式农民工
 #heroImage: /logo.svg
-heroText: 互联网小白
+heroText: 嵌入式农民工
 tagline: 盛年不重来，一日难再晨
-bgImage: https://img.newzone.top/home-bg-1.jpg
+bgImage: https://w.wallhaven.cc/full/l8/wallhaven-l8vp7y.jpg
 heroFullScreen: false
 #projects:
 #  - icon: project
