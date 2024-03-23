@@ -2,16 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <atom:link href="https://newzone.top/rss.xml" rel="self" type="application/rss+xml"/>
-    <title>LearnData-开源笔记</title>
+    <title>tueo的技术笔记</title>
     <link>https://newzone.top/</link>
-    <description>开源工具、效率方法、心理学探索的自我提升笔记，记录并输出一切能让自己提升的知识。</description>
+    <description>慢慢积累，坚持</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 23 Mar 2024 12:32:05 GMT</pubDate>
-    <lastBuildDate>Sat, 23 Mar 2024 12:32:05 GMT</lastBuildDate>
+    <pubDate>Sat, 23 Mar 2024 13:18:25 GMT</pubDate>
+    <lastBuildDate>Sat, 23 Mar 2024 13:18:25 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/zigbee-routing.html</link>
+      <guid>https://newzone.top/protocol/zigbee-routing.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description> 本文由 简悦 SimpRead 转码， 原文地址 tueo.github.io • Table Routing• Broadcast Routing• Multicast Routing• Many-to-One/Source Routing • Table Routing • Broadcast Routing • Multicast Routin...</description>
+      <pubDate>Sat, 23 Mar 2024 13:17:16 GMT</pubDate>
+      <content:encoded><![CDATA[<blockquote>
+<p>本文由 <a href="http://ksria.com/simpread/" target="_blank" rel="noopener noreferrer">简悦 SimpRead</a> 转码， 原文地址 <a href="https://tueo.github.io/2020/05/31/zigbee-routing/" target="_blank" rel="noopener noreferrer">tueo.github.io</a></p>
+</blockquote>
+<blockquote>
+<p>• Table Routing• Broadcast Routing• Multicast Routing• Many-to-One/Source Routing</p>
+</blockquote>
+<p>• Table Routing<br>
+• Broadcast Routing<br>
+• Multicast Routing<br>
+• Many-to-One/Source Routing</p>
+<p><a href="#1-1-Table-Routing" title="1.1. Table Routing"></a>1.1. Table Routing</p>
+]]></content:encoded>
+      <enclosure url="https://tueo.github.io/images/many_to_one_routing_275x285.png" type="image/png"/>
+    </item>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/zigbee-table.html</link>
+      <guid>https://newzone.top/protocol/zigbee-table.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description> 本文由 简悦 SimpRead 转码， 原文地址 tueo.github.io age 字段每过一个 nwkLinkStatusPeriod，就会增加，当 age 字段超过 nwkRouterAgeLimit 时就会将 Outgoing Cost 字段设置为 0。 2.1. 邻居表老化 age 字段每过一个 nwkLinkStatusPeriod，就...</description>
+      <pubDate>Sat, 23 Mar 2024 13:17:16 GMT</pubDate>
+      <content:encoded><![CDATA[<blockquote>
+<p>本文由 <a href="http://ksria.com/simpread/" target="_blank" rel="noopener noreferrer">简悦 SimpRead</a> 转码， 原文地址 <a href="https://tueo.github.io/2020/05/31/zigbee-table/" target="_blank" rel="noopener noreferrer">tueo.github.io</a></p>
+</blockquote>
+<blockquote>
+<p>age 字段每过一个 nwkLinkStatusPeriod，就会增加，当 age 字段超过 nwkRouterAgeLimit 时就会将 Outgoing Cost 字段设置为 0。</p>
+</blockquote>
+<hr>
+<table><thead><tr><th>Field Name</th><th>Field Type</th><th>Valid Range</th><th>Reference</th></tr></thead><tbody><tr><td>Network Address</td><td>Integer</td><td>0x0000- 0xfff7</td><td>route record 的目的网络地址</td></tr><tr><td>Relay Count</td><td>Integer</td><td>0x0000 - 0xffff</td><td>从集中器到目的节点的中继数量</td></tr><tr><td>Path</td><td>Set of Network Addresses</td><td></td><td>网络地址集合，表示从集中器到目的节点之间的节点地址集合</td></tr></tbody></table><table><thead><tr><th>Field Name</th><th>description</th></tr></thead><tbody><tr><td>Extended address</td><td>IEEE 地址</td></tr><tr><td>Network address</td><td>节点网络地址</td></tr><tr><td>Device type</td><td>节点类型 (coordinator router end device)</td></tr><tr><td>RxOnWhenIdle</td><td>idle 时是否可以接收 父节点和子节点必须 present</td></tr><tr><td>End Device Configuration</td><td>终端节点的配置</td></tr><tr><td>Timeout Counter</td><td>end device remaining time (sec)</td></tr><tr><td>Device timeout</td><td>end device child timeout(sec)</td></tr><tr><td>Relationship</td><td>与节点之间的关系</td></tr><tr><td>Transmit Failure</td><td>指示之前的数据通讯是否成功，数值越大，失败越多</td></tr><tr><td>LQI</td><td>该节点的链路质量</td></tr><tr><td>Outgoing Cost</td><td>传出损耗 0 表示无效</td></tr><tr><td>Age</td><td></td></tr><tr><td>Incoming beacon timestamp</td><td>从邻居接收到的最后一条 beacon 帧的时间戳</td></tr><tr><td>Beacon transmission tiem offset</td><td></td></tr><tr><td>Keepalive Received</td><td>表示自从 router 重启以来，至少接收到一条来自终端设备的数据？</td></tr><tr><td>Extended PAN ID</td><td>设备所属网络的 PAN ID</td></tr><tr><td>Logical channel</td><td>设备所在的信道</td></tr><tr><td>Depth</td><td>邻居节点的 tree depth</td></tr><tr><td>Beacon order</td><td>设备的 IEEE 802.15.4 信标顺序</td></tr><tr><td>Permit joining</td><td>设备是否正在允许 join</td></tr><tr><td>Potential parent</td><td>设备是否是潜在的父节点</td></tr></tbody></table>
+<p><a href="#2-1-%E9%82%BB%E5%B1%85%E8%A1%A8%E8%80%81%E5%8C%96" title="2.1. 邻居表老化"></a>2.1. 邻居表老化</p>
+]]></content:encoded>
+      <enclosure url="https://tueo.github.io/2020/05/31/zigbee-routing/" type="image/"/>
+    </item>
     <item>
       <title>博客文章样例</title>
       <link>https://newzone.top/posts/2024-03-01-blog_example.html</link>
