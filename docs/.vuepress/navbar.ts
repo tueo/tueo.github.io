@@ -34,11 +34,11 @@ export default navbar([
     icon: "tool",
     children: [
       {
-        text: "ChatGPT SC",
+        text: "hex-to-ascii",
         icon: "creative",
-        link: "https://www.aishort.top/",
+        link: "https://www.rapidtables.com/convert/number/hex-to-ascii.html",
       },
-      { text: "IMGPrompt", icon: "pic", link: "https://prompt.newzone.top/" },
+      { text: "ascii", icon: "pic", link: "https://devtool.tech/ascii" },
       { text: "多语言处理", icon: "others", link: "https://tools.newzone.top/json-translate" },
       {
         text: "工具收藏",
