@@ -67,7 +67,7 @@ export default hopeTheme({
     articleInfo: ["Date", "PageView", "Category", "Tag", "ReadingTime"],
     name: "三月的油菜花",
     avatar: "/avatar.png",
-    description: "zigbee, LTE",
+    description: "Zigbee, LTE",
     intro: "/intro.html",
     roundAvatar: true,
     medias: {

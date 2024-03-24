@@ -1,4 +1,8 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [tueo.github.io](https://tueo.github.io/2020/05/31/zigbee-routing/)
+---
+article: false
+title: Zigbee Routing
+icon: note
+---
 
 > • Table Routing• Broadcast Routing• Multicast Routing• Many-to-One/Source Routing
 

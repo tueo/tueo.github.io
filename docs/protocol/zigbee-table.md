@@ -1,4 +1,9 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [tueo.github.io](https://tueo.github.io/2020/05/31/zigbee-table/)
+---
+article: false
+title: Zigbee Table
+icon: note
+---
+
 
 > age 字段每过一个 nwkLinkStatusPeriod，就会增加，当 age 字段超过 nwkRouterAgeLimit 时就会将 Outgoing Cost 字段设置为 0。
 
