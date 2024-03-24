@@ -13,7 +13,7 @@ export default hopeTheme({
     url: "https://newzone.top",
   },
 
-  logo: "/logo.svg",
+  logo: "/avatar.png",
 
   // 是否全局启用路径导航
   breadcrumb: false,
@@ -65,8 +65,8 @@ export default hopeTheme({
   // 主题功能选项：https://theme-hope.vuejs.press/zh/config/theme/feature.html
   blog: {
     articleInfo: ["Date", "PageView", "Category", "Tag", "ReadingTime"],
-    name: "涂炜冬",
-    avatar: "/avatar_self.webp",
+    name: "三月的油菜花",
+    avatar: "/avatar.png",
     description: "zigbee, LTE",
     intro: "/intro.html",
     roundAvatar: true,
