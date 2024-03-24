@@ -8,9 +8,9 @@ export default defineUserConfig({
   // 网站语言，默认为中文
   lang: "zh-CN",
   // 网站标题
-  title: "tueo的技术笔记",
+  title: "三月的油菜花",
   // 网站描述
-  description: "慢慢积累，坚持",
+  description: "无聊的生活，需要找一些有意义的事情去度过",
 
   // 网站路径默认为主域名。如果网站部署在子路径下，比如 xxx.com/yyy，那么 base 应该被设置为 "/yyy/"
   base: "/",

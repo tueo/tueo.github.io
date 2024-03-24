@@ -10,9 +10,7 @@ export default sidebar({
         icon: "",
         prefix: "/protocol/",
         collapsible: true,
-        children: [
-          "README.md",
-        ],
+        children: ["zigbee-table.md", "zigbee-routing.md"],
       },
   ],
   // 专题区
