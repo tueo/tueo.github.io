@@ -39,12 +39,7 @@ export default navbar([
         link: "https://www.rapidtables.com/convert/number/hex-to-ascii.html",
       },
       { text: "ascii", icon: "pic", link: "https://devtool.tech/ascii" },
-      { text: "多语言处理", icon: "others", link: "https://tools.newzone.top/json-translate" },
-      {
-        text: "工具收藏",
-        icon: "categoryselected",
-        link: "https://nav.newzone.top/",
-      },
+      { text: "主题上手文档", icon: "others", link: "https://theme-hope.vuejs.press/zh/guide/" },
     ],
   },
 ]);
