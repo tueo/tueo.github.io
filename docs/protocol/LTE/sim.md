@@ -53,3 +53,33 @@ command APDU分为两个部分，分别是`Header`和Body，`Header`是一个com
 | READ RECORD  | B2  | 178  |
 | UPDATE RECORD  | DC  | 220  |
 | GET RESPONSE  | C0  | 192  |
+
+## 常见的SIM卡文件
+
+### ICCID
+
+![20240327131357](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327131357.png)
+
+ICCID文件ID是2EF2，在11.11文档中描述了它的结构。在该文件中使用BCD编码格式保存，占10个字节（20位）。
+
+但是实际上ICCID是在E.118文档中定义的，称为primary account number。在该文档中，ICCID中应该是19位的digit串。
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327132214.png)
+
+因此在实践上，ICCID的长度可能是19位，也可能是20位。当为19位的时候，在EFiccid文件中存储时，会在最后一位补一个F进去，因此也将ICCID从纯数字变成了可能携带字符F的形式。
+
+结构：
+
+- **Major industry identifier** 首先是2位数字行业代码，89表示电信行业。
+- **Country Code** 2到3位数字的国家码。
+- **Issuer identifier** 1到4位的数字，一般会是MCC。
+- **Individual account identification** 自定义的ID，但是一般是Mobile identification number。
+- 最后一位数字的是校验位，校验算法是Luhn algorithm。
+
+下面是一个携带F的ICCID的示例：
+
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327133833.png)
+
+ICCID按照一个19位或者20位的字符串（0~F）理解。在实际工程中，发现存在非89开头的ICCID，也存在`898600E1122115658504` 这种中间插入非0~9的ICCID。只要是19位或者20位，且满足BCD编码格式，都可以作为ICCID。
+
+
+
