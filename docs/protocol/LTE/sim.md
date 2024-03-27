@@ -14,7 +14,7 @@ date: 2024-03-25
 
 这里的APDU协议指SIM中使用的APDU，按照102221文档内容分析。
 
-![sim_contents_of_command_apdu.png](https://raw.githubusercontent.com/tueo/cloudimg/main/img/sim_contents_of_command_apdu.png)
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/sim_contents_of_command_apdu.png)
 
 command APDU分为两个部分，分别是`Header`和Body，`Header`是一个command APDU必须具备的，占4个字节，`Body`则是可选内容。
 
@@ -40,7 +40,7 @@ command APDU分为两个部分，分别是`Header`和Body，`Header`是一个com
 - **最小长度为2**
 - **最大长度为258**
 
-![sim_contents_of_response_apdu.png](https://raw.githubusercontent.com/tueo/cloudimg/main/img/sim_contents_of_response_apdu.png)
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/sim_contents_of_response_apdu.png)
 
 ## 常见command列表
 
@@ -58,11 +58,12 @@ command APDU分为两个部分，分别是`Header`和Body，`Header`是一个com
 
 ### ICCID
 
-![20240327131357](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327131357.png)
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327131357.png)
 
 ICCID文件ID是2EF2，在11.11文档中描述了它的结构。在该文件中使用BCD编码格式保存，占10个字节（20位）。
 
 但是实际上ICCID是在E.118文档中定义的，称为primary account number。在该文档中，ICCID中应该是19位的digit串。
+
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327132214.png)
 
 因此在实践上，ICCID的长度可能是19位，也可能是20位。当为19位的时候，在EFiccid文件中存储时，会在最后一位补一个F进去，因此也将ICCID从纯数字变成了可能携带字符F的形式。
