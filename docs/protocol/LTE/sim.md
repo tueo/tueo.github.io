@@ -1,11 +1,41 @@
 ---
 article: false
-title: SIM
+title: 🎫SIM卡
 icon: sim
 date: 2024-03-25
 ---
 
-# SIM
+# 🎫SIM卡
+
+## DF name 和 AID
+
+DF name就是AID🆔，可以是1~16个字节，在sim 卡中，每个AID应该是独一无二的。
+
+下面是一个典型的AID示例，共16bytes。
+```
+A0000000871002FF86FFFF89FFFFFFFF
+```
+
+AID在7816-5文档中定义，但是可惜该文档收费😔。我在131110和101220文档中找到了相关结构示例如下：
+
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327192035.png)
+
+所以AID的结构如下：
+
+- `RID` 占5个字节。
+- `PIX` 小于11个字节。
+
+RID的值如下：
+
+- 'A000000009' for ETSI
+- '**A000000087**' for the 3GPP
+- 'A000000343' for the 3GPP2
+
+PIX的结构如下
+- Digits 1 to 4 Application code
+- Digits 5 to 8 国家码(Country code)，上面的FF86就是中国，中国国家码是86，然后左边两位是补的ff.
+- Digits 9 to 14 Application provider code，上面的FFFF89
+- Digits 15 up to 22 Application provider field Optional. Up to 8 digits
 
 ## command APDU的最小长度和最大长度
 
@@ -81,6 +111,4 @@ ICCID文件ID是2EF2，在11.11文档中描述了它的结构。在该文件中�
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240327133833.png)
 
 ICCID按照一个19位或者20位的字符串（0~F）理解。在实际工程中，发现存在非89开头的ICCID，也存在`898600E1122115658504` 这种中间插入非0~9的ICCID。只要是19位或者20位，且满足BCD编码格式，都可以作为ICCID。
-
-
 
