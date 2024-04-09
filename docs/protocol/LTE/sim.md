@@ -37,9 +37,11 @@ PIX的结构如下
 - Digits 9 to 14 Application provider code，上面的FFFF89
 - Digits 15 up to 22 Application provider field Optional. Up to 8 digits
 
+## APDU到TPDU的映射
+
 ## command APDU的最小长度和最大长度
 
-- **最小长度为4**
+- **最小长度为4** 注意，TPDU最小为5个字节
 - **最大长度为261**
 
 这里的APDU协议指SIM中使用的APDU，按照102221文档内容分析。
@@ -57,7 +59,7 @@ command APDU分为两个部分，分别是`Header`和Body，`Header`是一个com
 |3|CLA INS P1 P2 Lc Data|
 |4|CLA INS P1 P2 Lc Data Le|
 
-最短长度出现在case1中，只有`Header`部分，因此仅有4个字节。
+最短长度出现在case1中，只有`Header`部分，因此仅有4个字节；注意TPDU最小为5个字节，在case1的情况下，映射时，P3会填充为0。
 最长长度出现在case4中，`261 = 4(首部) + 1(Lc) + 255(Data) + 1(Le)`， Lc只占用1个字节，因此Data最长仅为255 Bytes。
 
 - Lc表示command APDU中data字段的数据size，如果Lc存在，Data的size范围在`1~255`字节。
@@ -85,6 +87,22 @@ command APDU分为两个部分，分别是`Header`和Body，`Header`是一个com
 | GET RESPONSE  | C0  | 192  |
 
 ## 常见的SIM卡文件
+
+### IMSI
+
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240328151528.png)
+
+IMSI是国际移动用户识别码，是用于区分蜂窝网络中不同用户的、在所有蜂窝网络中不重复的识别码。
+
+🧩**最大长度是多少？**
+
+![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240328151845.png)
+
+IMSI遵循E.212文档的规范，最大长度为15位，部分运营商是14位的。
+
+❔ **都是数字么**
+
+根据规范要求，应该都是0~9的数字。
 
 ### ICCID
 
