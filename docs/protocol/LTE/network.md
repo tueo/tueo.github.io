@@ -1,13 +1,23 @@
 ---
 article: false
-title: LTE网络
-icon: network
+title: 📶LTE网络
 date: 2024-04-08
 ---
 
-## 网络参数
+- [1. 网络参数](#1-网络参数)
+  - [1.1. RSRP(Reference Signal Received Power)](#11-rsrpreference-signal-received-power)
+  - [1.2. RSRQ(Reference Signal Received Quality)](#12-rsrqreference-signal-received-quality)
+  - [1.3. RSSI(Reference Signal Strength Indicator)](#13-rssireference-signal-strength-indicator)
+  - [1.4. SINR(Signal to Interference plus Noise Ratio)](#14-sinrsignal-to-interference-plus-noise-ratio)
+  - [1.5. RSRP RSRQ SINR的评价标准](#15-rsrp-rsrq-sinr的评价标准)
+  - [1.6. GSM下的RSSI](#16-gsm下的rssi)
+  - [1.7. GSM下的rx\_lev(signal level)](#17-gsm下的rx_levsignal-level)
+  - [1.8. 基站定位](#18-基站定位)
+  - [1.9. 参考文档](#19-参考文档)
 
-#### RSRP(Reference Signal Received Power)
+## 1. 网络参数
+
+### 1.1. RSRP(Reference Signal Received Power)
 
 **参考信号接收功率**，在**某个Symbol内承载Reference Signal的所有RE上**接收到的信号功率的平均值。单位是dBm，报告值的范围从-17到97，對應测量值从-156dBm到-44dBm，步进为1dBm。
 
@@ -127,7 +137,7 @@ RSRP的报告值0对应测量值-140dBm。如果报告值要大于0，则测量�
 
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409153613.png)
 
-#### RSRQ(Reference Signal Received Quality)
+### 1.2. RSRQ(Reference Signal Received Quality)
 
 **参考信号接收质量**，单位是dB，报告值的范围从-30到46，对映测量值从-34dB到2.5dB，步进为0.5dB。
 
@@ -182,7 +192,7 @@ RSRQ的报告值0对应测量值为-19.5dB。
 | 34   | -3    |       | dB   |
 
 
-#### RSSI(Reference Signal Strength Indicator)
+### 1.3. RSSI(Reference Signal Strength Indicator)
 
 代表接收带宽内的总功率，包括有用信号，干扰信号的。单位是dBm，报告值的范围从00到76， 对应测量值从-100到-25dBm，步进1dBm。
 
@@ -269,18 +279,18 @@ RSRQ的报告值0对应测量值为-19.5dB。
 | 76   | -25  |      | dBm  |
 
 
-#### SINR(Signal to Interference plus Noise Ratio)
+### 1.4. SINR(Signal to Interference plus Noise Ratio)
 
 信噪比，单位是dB，报告值的范围从00到127， 对应测量值从-23到40dB，步进0.5dB。
 
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409161755.png)
 
-#### RSRP RSRQ SINR的评价标准
+### 1.5. RSRP RSRQ SINR的评价标准
 
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409152938.png)
 
 
-### GSM下的RSSI
+### 1.6. GSM下的RSSI
 
 来自27007文档的定义，received signal strength indication，同下面的rxlev相比，是signal level的不同表现形式，这里的步进是2dBm。
 
@@ -322,7 +332,7 @@ rssi用于`CSQ`指令，rxlev用于`CESQ`指令。
 | 31   | -53  |                             | dBm  |
 | 99   |      | not known or not detectable ||
 
-### GSM下的rx_lev(signal level)
+### 1.7. GSM下的rx_lev(signal level)
 
 RXLEV(the value of received signal strength)
 
@@ -398,12 +408,12 @@ RXLEV(the value of received signal strength)
 | 63    | -48  |      | dBm  |
 
 
-### 基站定位
+### 1.8. 基站定位
 
 基站定位使用到的参数有MCC，MNC，LAC，CellID, 这个网站👉🏼[基站定位查询](http://api.cellocation.com:84/cell.html) 可以用来测试基站定位。
 
 
-### 参考文档
+### 1.9. 参考文档
 
 - LTE下测量值和上报值的映射关系在36.133文档中，包含LTE相关的RSRP RSRQ RSSI SINR
 - GSM下测量值和上报值的映射关系在45008文档中。
