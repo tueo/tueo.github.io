@@ -19,7 +19,7 @@ export default sidebar({
             icon: "lte",
             prefix: "/protocol/LTE",
             collapsible: false,
-            children: ["sim.md"],
+            children: ["sim.md", "network.md", "lte_physical.md", "oper_name.md"],
         },
     ],
     // 专题区
