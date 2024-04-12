@@ -6,42 +6,12 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Apr 2024 02:48:25 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Apr 2024 02:48:25 GMT</lastBuildDate>
+    <pubDate>Fri, 12 Apr 2024 06:21:39 GMT</pubDate>
+    <lastBuildDate>Fri, 12 Apr 2024 06:21:39 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
-    <item>
-      <title></title>
-      <link>https://newzone.top/protocol/LTE/network.html</link>
-      <guid>https://newzone.top/protocol/LTE/network.html</guid>
-      <source url="https://newzone.top/rss.xml"></source>
-      <description>网络参数 RSRP(Reference Signal Received Power) 参考信号接收功率，单位是dBm，报告值的范围从-17到97，对映测量值从-156dBm到-44dBm，步进为1dBm。 RSRQ(Reference Signal Received Quality) 参考信号接收质量，单位是dB，报告值的范围从-30到46，对映测量值...</description>
-      <pubDate>Tue, 09 Apr 2024 09:27:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h2>网络参数</h2>
-<h4>RSRP(Reference Signal Received Power)</h4>
-<p><strong>参考信号接收功率</strong>，单位是dBm，报告值的范围从-17到97，对映测量值从-156dBm到-44dBm，步进为1dBm。</p>
-<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409153613.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<h4>RSRQ(Reference Signal Received Quality)</h4>
-<p><strong>参考信号接收质量</strong>，单位是dB，报告值的范围从-30到46，对映测量值从-34dB到2.5dB，步进为0.5dB。</p>
-<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409154335.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<h4>RSSI(Reference Signal Strength Indicator)</h4>
-<p>代表接收带宽内的总功率， 包括有用信号，干扰信号的。单位是dBm，报告值的范围从00到76， 对应测量值从-100到-25dBm，步进1dBm。
-<img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409160705.png" alt="" loading="lazy"></p>
-<h4>SINR(Signal to Interference plus Noise Ratio)</h4>
-<p>信噪比，单位是dB，报告值的范围从00到127， 对应测量值从-23到40dB，步进0.5dB。</p>
-<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409161755.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<h4>RSRP RSRQ SINR的评价标准</h4>
-<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409152938.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<h4>RXLEV(the value of received signal strength)</h4>
-<p>2G下表示接收信号强度，单位是dBm，报告值的范围从0到63，对应测量值从-110dBm到-48dBm, 步进1dBm。</p>
-<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409165505.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<h3>基站定位</h3>
-<p>基站定位使用到的参数有MCC，MNC，LAC，CellID, 这个网站👉🏼<a href="http://api.cellocation.com:84/cell.html" target="_blank" rel="noopener noreferrer">基站定位查询</a> 可以用来测试基站定位。</p>
-]]></content:encoded>
-      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240409153613.png" type="image/png"/>
-    </item>
     <item>
       <title>博客文章样例</title>
       <link>https://newzone.top/posts/2024-03-01-blog_example.html</link>
