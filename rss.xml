@@ -6,12 +6,119 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Apr 2024 03:13:58 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Apr 2024 03:13:58 GMT</lastBuildDate>
+    <pubDate>Thu, 13 Jun 2024 09:14:55 GMT</pubDate>
+    <lastBuildDate>Thu, 13 Jun 2024 09:14:55 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/git.html</link>
+      <guid>https://newzone.top/protocol/git.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description>文件权限变化导致的git差异 最近有一个项目中，经常出现特定两个文件显示存在git差异，但是使用BCompare比较，其二进制完全相同。使用 git diff 查看，提示如下： 从git信息看，存在文件权限变化，导致git认为文件内容有变化。 知道差异原因就好处理了，可以使用如下命令让git忽略文件权限差异。 gerrit提交代码 提交代码到my_br...</description>
+      <pubDate>Thu, 13 Jun 2024 09:14:03 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>文件权限变化导致的git差异</h2>
+<p>最近有一个项目中，经常出现特定两个文件显示存在git差异，但是使用BCompare比较，其二进制完全相同。使用 <code>git diff</code> 查看，提示如下：
+<img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240509155417.png" alt="" loading="lazy"></p>
+<p>从git信息看，存在文件权限变化，导致git认为文件内容有变化。</p>
+<p>知道差异原因就好处理了，可以使用如下命令让git忽略文件权限差异。</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> config <span class="token parameter variable">--global</span> core.fileMode <span class="token boolean">false</span>
+</code></pre></div><h2>gerrit提交代码</h2>
+<p>提交代码到<code>my_branch</code>，需要审核</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> push origin HEAD:refs/for/my_branch
+</code></pre></div><p>提交代码到<code>my_branch</code>，不需要代码审核</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> push origin HEAD:refs/heads/my_branch
+<span class="token function">git</span> push origin HEAD:refs/for/my_branch%no-review
+</code></pre></div>]]></content:encoded>
+      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240509155417.png" type="image/png"/>
+    </item>
+    <item>
+      <title>kconfig文件</title>
+      <link>https://newzone.top/protocol/kconfig.html</link>
+      <guid>https://newzone.top/protocol/kconfig.html</guid>
+      <source url="https://newzone.top/rss.xml">kconfig文件</source>
+      <description>kconfig文件 在调整项目编译结构时，需要使用python的 kconfiglib库来解析kconfig文件，但是调整的一个kconfig文件一直无法被感知到。 一开始怀疑是该kconfig文件没有使用menu的原因，但是从kconfig文档看，应该不存在该问题。 最终定位到是source语法的使用问题。 在项目中， top level的kconf...</description>
+      <pubDate>Thu, 13 Jun 2024 09:14:03 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>在调整项目编译结构时，需要使用python的 kconfiglib库来解析kconfig文件，但是调整的一个kconfig文件一直无法被感知到。</p>
+<p>一开始怀疑是该kconfig文件没有使用menu的原因，但是从kconfig文档看，应该不存在该问题。</p>
+<p>最终定位到是<code>source</code>语法的使用问题。</p>
+<p>在项目中， top level的kconfig文件使用<code>orsource</code>包含了中间层的A kconfig文件（为项目调整编写的新的kconfig文件）。 A kconfig文件使用<code>osource</code>包含目标B kconfig文件。</p>
+<p>测试发现一直无法生成B kconfig文件对应的cmake变量。最后才看到漏掉了<code>orsource</code>的<code>r</code>。</p>
+<p><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240522202629.png" alt="" loading="lazy">
+其间也怀疑过osource使用存在问题，使用gpt查询<code>osource</code>和<code>orsource</code>的差异，结果被gpt的错误答案误导了😭</p>
+<p>在kconfiglib中有如下描述：</p>
+<p><code>source</code> 用来引入其他的kconfig文件。
+<code>osource</code> 表示optional source，表示可选的，如果osource指定的kconfig文件不存在，编译不会报错，将继续下去。
+<code>rsource</code> 表示relative source，后面应用的kconfig文件支持相对路径，路径相对于包含rsource语句的kconfig而言。
+<code>orsource</code> 则是<code>osource</code>和<code>rsource</code>的接合。</p>
+<p>osurce rsource orsource等其实是kconfiglib提供的kconfig的扩展。</p>
+]]></content:encoded>
+      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240522202629.png" type="image/png"/>
+    </item>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/ZigBee/tcpip.html</link>
+      <guid>https://newzone.top/protocol/ZigBee/tcpip.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description>编程中常用的IP地址数据接口与接口 数据结构： struct in_addr 和 ip4_addr_t等价 线程安全型接口： inet_pton 转换字符串到网络字节序地址 inet_ntop 将网络字节序地址转换为字符串 线程不安全接口： inet_addr 将点分十进制IP地址（字符串）转换成网络字节序IP地址【返回网络字节序的地址】 inet_a...</description>
+      <pubDate>Thu, 13 Jun 2024 09:14:03 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>编程中常用的IP地址数据接口与接口</h2>
+<p>数据结构：
+<code>struct in_addr</code> 和 <code>ip4_addr_t</code>等价</p>
+<p>线程安全型接口：</p>
+<ul>
+<li><strong>inet_pton</strong> 转换字符串到网络字节序地址</li>
+<li><strong>inet_ntop</strong> 将网络字节序地址转换为字符串</li>
+</ul>
+<p>线程不安全接口：
+<strong>inet_addr</strong> 将点分十进制IP地址（字符串）转换成网络字节序IP地址【返回网络字节序的地址】
+<strong>inet_aton</strong> 同上【返回网络字节序的地址】
+<strong>inet_ntoa</strong> 将网络字节序IP转化点分十进制IP（字符串）</p>
+<h2>inet接口和ip4_addr以及ip6_addr接口的区别</h2>
+<p>ip地址数据接口差异：</p>
+<p>inet接口定义：</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span><span class="token class-name">in_addr_t</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">defined</span><span class="token punctuation">(</span>IN_ADDR_T_DEFINED<span class="token punctuation">)</span></span></span>
+<span class="token keyword">typedef</span> <span class="token class-name">u32_t</span> <span class="token class-name">in_addr_t</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">in_addr</span> <span class="token punctuation">{</span>
+  <span class="token class-name">in_addr_t</span> s_addr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">in6_addr</span> <span class="token punctuation">{</span>
+  <span class="token keyword">union</span> <span class="token punctuation">{</span>
+    <span class="token class-name">u32_t</span> u32_addr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token class-name">u8_t</span>  u8_addr<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> un<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">s6_addr</span>  <span class="token expression">un<span class="token punctuation">.</span>u8_addr</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>ip4_addr.h</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token comment">/** This is the aligned version of ip4_addr_t,
+   used as local variable, on the stack, etc. */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ip4_addr</span> <span class="token punctuation">{</span>
+  <span class="token class-name">u32_t</span> addr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/** ip4_addr_t uses a struct for convenience only, so that the same defines can
+ * operate both on ip4_addr_t as well as on ip4_addr_p_t. */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">ip4_addr</span> <span class="token class-name">ip4_addr_t</span><span class="token punctuation">;</span>
+</code></pre></div><p>ip6_addr.h</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token comment">/** This is the aligned version of ip6_addr_t,
+    used as local variable, on the stack, etc. */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ip6_addr</span> <span class="token punctuation">{</span>
+  <span class="token class-name">u32_t</span> addr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">LWIP_IPV6_SCOPES</span></span>
+  <span class="token class-name">u8_t</span> zone<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* LWIP_IPV6_SCOPES */</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/** IPv6 address */</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">ip6_addr</span> <span class="token class-name">ip6_addr_t</span><span class="token punctuation">;</span>
+</code></pre></div>]]></content:encoded>
+    </item>
     <item>
       <title>博客文章样例</title>
       <link>https://newzone.top/posts/2024-03-01-blog_example.html</link>
