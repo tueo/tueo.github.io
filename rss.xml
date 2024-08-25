@@ -6,12 +6,27 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 13 Jun 2024 09:14:55 GMT</pubDate>
-    <lastBuildDate>Thu, 13 Jun 2024 09:14:55 GMT</lastBuildDate>
+    <pubDate>Sun, 25 Aug 2024 13:40:12 GMT</pubDate>
+    <lastBuildDate>Sun, 25 Aug 2024 13:40:12 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title>初识</title>
+      <link>https://newzone.top/protocol/linux/00_mt7866.html</link>
+      <guid>https://newzone.top/protocol/linux/00_mt7866.html</guid>
+      <source url="https://newzone.top/rss.xml">初识</source>
+      <description>初识 从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis(合宙家) 的 usbnet 以及 PPP 拨号等功能。 拿到 开发板 后，记录开机 log 如下。 flash &amp; RAM 大小 flash 分区 上面的分区中缺少从 0x50000 到 0x1...</description>
+      <pubDate>Sun, 25 Aug 2024 13:39:11 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis(合宙家) 的 usbnet 以及 PPP 拨号等功能。</p>
+<p>拿到 <code>开发板</code> 后，记录开机 log 如下。</p>
+<h2>flash &amp; RAM 大小</h2>
+<p>| 存储  | size  | 型号      |
+|</p>
+]]></content:encoded>
+    </item>
     <item>
       <title></title>
       <link>https://newzone.top/protocol/git.html</link>
