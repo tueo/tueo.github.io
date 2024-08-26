@@ -6,12 +6,68 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 26 Aug 2024 00:36:18 GMT</pubDate>
-    <lastBuildDate>Mon, 26 Aug 2024 00:36:18 GMT</lastBuildDate>
+    <pubDate>Mon, 26 Aug 2024 11:06:20 GMT</pubDate>
+    <lastBuildDate>Mon, 26 Aug 2024 11:06:20 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/linux/02_uboot.html</link>
+      <guid>https://newzone.top/protocol/linux/02_uboot.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description>选择 uboot 这里选择歪多拉的 u-boot，该版本支持 web 升级，项目说明也比较多，适合入门。 构建第一个 uboot 镜像 歪多拉的编译参考 编译 源码下载 解压编译工具链到/opt/目录下 安装 openjdk, 并保证系统语言为英文 进入 u-boot-mt7688 源码，编译 生成的 uboot 固件文件为 uboot.bin, 从编...</description>
+      <pubDate>Mon, 26 Aug 2024 11:05:20 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>选择 uboot</h2>
+<p>这里选择歪多拉的 u-boot，该版本支持 web 升级，项目说明也比较多，适合入门。</p>
+<h2>构建第一个 uboot 镜像</h2>
+<p>歪多拉的编译参考
+<a href="https://widora.cn/compile" target="_blank" rel="noopener noreferrer">编译</a></p>
+<ul>
+<li>源码下载</li>
+</ul>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> clone https://github.com/widora/u-boot-mt7688.git
+</code></pre></div><p>解压编译工具链到/opt/目录下</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> u-boot-mt7688
+<span class="token function">sudo</span> <span class="token function">tar</span> xvfj buildroot-gcc342.tar.bz2 <span class="token parameter variable">-C</span> /opt/
+</code></pre></div><p>安装 openjdk, 并保证系统语言为英文</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> openjdk-8-jdk
+</code></pre></div><p>进入 u-boot-mt7688 源码，编译</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> u-boot-mt7688
+<span class="token function">make</span> clean<span class="token punctuation">;</span><span class="token function">make</span>
+</code></pre></div><p>生成的 uboot 固件文件为 <code>uboot.bin</code>, 从编译完的输出信息可以看到，生成的镜像大小为 110376 Bytes, 没有超出 bootloader 的大小限制。</p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code>Image Name:   SPI Flas
+Created:      Sun Aug <span class="token number">25</span> <span class="token number">20</span>:05:45 <span class="token number">2024</span>
+Image Type:   MIPS Linux Standalone Program <span class="token punctuation">(</span>uncompressed<span class="token punctuation">)</span>
+Data Size:    <span class="token number">110376</span> Bytes <span class="token operator">=</span> <span class="token number">107.79</span> kB <span class="token operator">=</span> <span class="token number">0.11</span> MB
+Load Address: 0xBC000000
+Entry Point:  0xBC000000
+DRAM Parameter: <span class="token number">29</span> <span class="token punctuation">(</span>Parm0<span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">Parm1</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span><span class="token operator">&lt;&lt;</span>IMPORTANT<span class="token operator">&gt;&gt;</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+Notes:Uboot firmware is uboot.bin NOT uboot.img
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+</code></pre></div><h2>调整 uboot 镜像</h2>
+<ol>
+<li>flash 大小需要为 16MB</li>
+<li>RAM 的大小需要调整为 64MB</li>
+</ol>
+<p>通过<code>make menuconfig</code> 进入配置界面，修改配置，将 DDR size 调整 512Mb, 也就是 64MB。
+<img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240826111036.png" alt="" loading="lazy"></p>
+]]></content:encoded>
+      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240826111036.png" type="image/png"/>
+    </item>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/linux/03_openwrt.html</link>
+      <guid>https://newzone.top/protocol/linux/03_openwrt.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description>feeds </description>
+      <pubDate>Mon, 26 Aug 2024 11:05:20 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>feeds</h2>
+]]></content:encoded>
+    </item>
     <item>
       <title>1. RT-Thread网络设备框架</title>
       <link>https://newzone.top/protocol/rtthread_netdev.html</link>
@@ -91,13 +147,13 @@
       <link>https://newzone.top/protocol/linux/00_mt7866.html</link>
       <guid>https://newzone.top/protocol/linux/00_mt7866.html</guid>
       <source url="https://newzone.top/rss.xml">初识</source>
-      <description>初识 从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis(合宙家) 的 usbnet 以及 PPP 拨号等功能。 拿到 开发板 后，记录开机 log 如下。 flash &amp; RAM 大小 flash 分区 上面的分区中缺少从 0x50000 到 0x1...</description>
+      <description>初识 从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能. 拿到 开发板 后，记录开机 log 如下。 flash &amp; RAM 大小 flash 分区 上面的分区中缺少从 0x50000 到 0x1...</description>
       <pubDate>Sun, 25 Aug 2024 13:39:11 GMT</pubDate>
       <content:encoded><![CDATA[
-<p>从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis(合宙家) 的 usbnet 以及 PPP 拨号等功能。</p>
+<p>从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能.</p>
 <p>拿到 <code>开发板</code> 后，记录开机 log 如下。</p>
 <h2>flash &amp; RAM 大小</h2>
-<p>| 存储  | size  | 型号      |
+<p>| 存储  | size  | 型号         |
 |</p>
 ]]></content:encoded>
     </item>
