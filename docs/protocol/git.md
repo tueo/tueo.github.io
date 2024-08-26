@@ -26,3 +26,16 @@ git push origin HEAD:refs/for/my_branch
 git push origin HEAD:refs/heads/my_branch
 git push origin HEAD:refs/for/my_branch%no-review
 ```
+## 查看历史commit的文件信息
+
+```bash
+git whatchanged
+```
+
+## 忽略本地修改，但是不适用.gitignore
+
+```
+git update-index --skip-worktree /path/to/file
+```
+这种方式适用于文件已经存在于仓库，但是本地修改不想提交到仓库。如果是新增的文件，可以在`.git/info/exclude`中添加希望忽略的文件。
+
