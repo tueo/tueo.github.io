@@ -6,12 +6,86 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 25 Aug 2024 13:40:12 GMT</pubDate>
-    <lastBuildDate>Sun, 25 Aug 2024 13:40:12 GMT</lastBuildDate>
+    <pubDate>Mon, 26 Aug 2024 00:36:18 GMT</pubDate>
+    <lastBuildDate>Mon, 26 Aug 2024 00:36:18 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title>1. RT-Thread网络设备框架</title>
+      <link>https://newzone.top/protocol/rtthread_netdev.html</link>
+      <guid>https://newzone.top/protocol/rtthread_netdev.html</guid>
+      <source url="https://newzone.top/rss.xml">1. RT-Thread网络设备框架</source>
+      <description> 1. RT-Thread网络设备框架 1.1. netdev是如何获取到不同网络协议栈网卡信息的? 1.2. netdev和协议栈网卡的绑定关系? 1.3. netdev实例的创建 1.3.1. 共享资源保护 SAL层如何使用netdev? netdev示例状态变换通知 1. RT-Thread网络设备框架 在rtthread中, netdev致力于...</description>
+      <pubDate>Mon, 26 Aug 2024 00:29:24 GMT</pubDate>
+      <content:encoded><![CDATA[<ul>
+<li><a href="#1-rt-thread%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E6%A1%86%E6%9E%B6">1. RT-Thread网络设备框架</a>
+<ul>
+<li><a href="#11-netdev%E6%98%AF%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%88%B0%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E7%BD%91%E5%8D%A1%E4%BF%A1%E6%81%AF%E7%9A%84">1.1. netdev是如何获取到不同网络协议栈网卡信息的?</a></li>
+<li><a href="#12-netdev%E5%92%8C%E5%8D%8F%E8%AE%AE%E6%A0%88%E7%BD%91%E5%8D%A1%E7%9A%84%E7%BB%91%E5%AE%9A%E5%85%B3%E7%B3%BB">1.2. netdev和协议栈网卡的绑定关系?</a></li>
+<li><a href="#13-netdev%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%88%9B%E5%BB%BA">1.3. netdev实例的创建</a>
+<ul>
+<li><a href="#131-%E5%85%B1%E4%BA%AB%E8%B5%84%E6%BA%90%E4%BF%9D%E6%8A%A4">1.3.1. 共享资源保护</a></li>
+</ul>
+</li>
+<li><a href="#sal%E5%B1%82%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8netdev">SAL层如何使用netdev?</a></li>
+<li><a href="#netdev%E7%A4%BA%E4%BE%8B%E7%8A%B6%E6%80%81%E5%8F%98%E6%8D%A2%E9%80%9A%E7%9F%A5">netdev示例状态变换通知</a></li>
+</ul>
+</li>
+</ul>
+<h1>1. RT-Thread网络设备框架</h1>
+<figure><img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240806213013.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>在rtthread中, netdev致力于解决不同网络协议簇的网络设备的统一问题. 用于统一管理各个网卡的信息与网络连接信息.</p>
+<p>从架构图上可以看到, netdev对上向SAL套接字抽象层提供服务, 对下, 抽象封装了Lwip, AT Socket等不同网络协议簇的网络设备信息.</p>
+<h2>1.1. netdev是如何获取到不同网络协议栈网卡信息的?</h2>
+<p>netdev在接口上提供了<code>low_level</code>系列接口用于不同网络协议簇的网卡信息获取. 这些接口由网络协议栈的驱动程序调用, 比如底层网卡的ip地址变更, 就通过<code>netdev_low_level_set_ipaddr</code>
+修改netdev中保存的对应的网卡的ip地址.</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token comment">/* Set network interface device status and address, this function can only be called in the network interface device driver */</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_ipaddr</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">ip_addr_t</span> <span class="token operator">*</span>ipaddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_netmask</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">ip_addr_t</span> <span class="token operator">*</span>netmask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_gw</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">ip_addr_t</span> <span class="token operator">*</span>gw<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_dns_server</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token class-name">uint8_t</span> dns_num<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token class-name">ip_addr_t</span> <span class="token operator">*</span>dns_server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_status</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token class-name">rt_bool_t</span> is_up<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_link_status</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token class-name">rt_bool_t</span> is_up<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_internet_status</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token class-name">rt_bool_t</span> is_up<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_low_level_set_dhcp_status</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token class-name">rt_bool_t</span> is_enable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>如下是在LWIP协议栈中, netif_set_ipaddr中嵌入了netdev_low_level_set_ipaddr的调用, 用于在LWIP协议栈网卡的IP地址变更的时候, 同步修改netdev中的IP地址.</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token keyword">void</span>
+<span class="token function">netif_set_ipaddr</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netif</span> <span class="token operator">*</span>netif<span class="token punctuation">,</span> <span class="token class-name">ip_addr_t</span> <span class="token operator">*</span>ipaddr<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">RT_USING_NETDEV</span></span>
+  <span class="token comment">/* rt-thread sal network interface device set IP address operations */</span>
+  <span class="token function">netdev_low_level_set_ipaddr</span><span class="token punctuation">(</span><span class="token function">netdev_get_by_name</span><span class="token punctuation">(</span>netif<span class="token operator">-&gt;</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">ip_addr_t</span> <span class="token operator">*</span><span class="token punctuation">)</span>ipaddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">/* RT_USING_NETDEV */</span></span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2>1.2. netdev和协议栈网卡的绑定关系?</h2>
+<p>netdev和协议栈网卡的绑定关系是通过关联协议栈网卡<code>name</code>和netdev示例的<code>name</code>实现的. 如上面的示例中, netdev_get_by_name通过netif-&gt;name获取到LWIP协议栈网卡的netdev实例, 在rtthread中, 协议栈网卡中的<code>name</code>做了扩充, 增加到6个字节.</p>
+<p>在netdev实例的创建接口(<code>netdev_register</code>)中, 也可以指定自定义数据, 通常可以将协议栈网卡的句柄传入, 这样也能实现从netdev示例反解出协议栈网卡的句柄.</p>
+<h2>1.3. netdev实例的创建</h2>
+<p>netdev的实例由使用方申请和释放, 可以通过<code>netdev_register</code>和<code>netdev_unregister</code>将netdev实例注册到netdev管理器中或者从netdev管理器中注销. netdev管理器中提供链表的方式串连这些netdev实例.</p>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">netdev_register</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>user_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">netdev_unregister</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3>1.3.1. 共享资源保护</h3>
+<p>netdev管理器中, 通过自选锁的方式对全局链表handle进行保护.</p>
+<h2>SAL层如何使用netdev?</h2>
+<ol>
+<li>在SAL层的socket接口初始化时, 会首先尝试查找一个netdev def实例, 如果该实例不可用, 会回退尝试通过Address families匹配netdev实例. 如果匹配成功, 则将netdev实例和socket实例绑定, <strong>将netdev示例的句柄赋值给socket实例的netdev成员变量</strong>.</li>
+<li>socket bind时, 会通过IP地址在netdev管理器中查询匹配指定IP地址的netdev实例, 如果匹配成功, 则更新socket实例的netdev成员变量.</li>
+</ol>
+<p>在SAL层的许多地方, 会直接通过socket实例的netdev成员变量访问netdev实例中保存的网络连接信息, 比如网卡是否可用等.</p>
+<blockquote>
+<p>多线程安全性问题: 在示例从netdev管理器中被注销后, 会将该netdev memset为0, SAL层在使用前都会检查netdev的UP标记, 以确定是否可以访问该netdev实例. 但是SAL层能否感知到netdev示例被协议栈底层释放呢? 在SAL层代码汇总并没有看到该痕迹. 或者说协议栈层网卡被销毁前有机制通知到SAL层, SAL层先删除自己的句柄, 这样就不存在多线程问题了.</p>
+</blockquote>
+<h2>netdev示例状态变换通知</h2>
+<div class="language-c" data-ext="c" data-title="c"><pre class="language-c"><code><span class="token keyword">void</span> <span class="token function">netdev_set_register_callback</span><span class="token punctuation">(</span>netdev_callback_fn status_callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_set_status_callback</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> netdev_callback_fn status_callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">netdev_set_addr_callback</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">netdev</span> <span class="token operator">*</span>netdev<span class="token punctuation">,</span> netdev_callback_fn addr_callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>]]></content:encoded>
+      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240806213013.png" type="image/png"/>
+    </item>
     <item>
       <title>初识</title>
       <link>https://newzone.top/protocol/linux/00_mt7866.html</link>
@@ -46,7 +120,12 @@
 </code></pre></div><p>提交代码到<code>my_branch</code>，不需要代码审核</p>
 <div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> push origin HEAD:refs/heads/my_branch
 <span class="token function">git</span> push origin HEAD:refs/for/my_branch%no-review
-</code></pre></div>]]></content:encoded>
+</code></pre></div><h2>查看历史commit的文件信息</h2>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token function">git</span> whatchanged
+</code></pre></div><h2>忽略本地修改，但是不适用.gitignore</h2>
+<div class="language-text" data-ext="text" data-title="text"><pre class="language-text"><code>git update-index --skip-worktree /path/to/file
+</code></pre></div><p>这种方式适用于文件已经存在于仓库，但是本地修改不想提交到仓库。如果是新增的文件，可以在<code>.git/info/exclude</code>中添加希望忽略的文件。</p>
+]]></content:encoded>
       <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240509155417.png" type="image/png"/>
     </item>
     <item>
