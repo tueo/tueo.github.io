@@ -6,12 +6,42 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 26 Aug 2024 11:06:20 GMT</pubDate>
-    <lastBuildDate>Mon, 26 Aug 2024 11:06:20 GMT</lastBuildDate>
+    <pubDate>Wed, 28 Aug 2024 02:00:00 GMT</pubDate>
+    <lastBuildDate>Wed, 28 Aug 2024 02:00:00 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
     <category>工具</category>
+    <item>
+      <title>Updating the Linux Image</title>
+      <link>https://newzone.top/protocol/linux/01_update_img.html</link>
+      <guid>https://newzone.top/protocol/linux/01_update_img.html</guid>
+      <source url="https://newzone.top/rss.xml">Updating the Linux Image</source>
+      <description>Updating the Linux Image 计划通过 UBOOT 下载 KERNEL 镜像到 SRAM 的方式升级下 kernel 代码，文件名称为 openwrt-ramips-mt7688-widora1664-squashfs-sysupgrade.bin . </description>
+      <pubDate>Wed, 28 Aug 2024 01:59:03 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>计划通过 UBOOT 下载 KERNEL 镜像到 SRAM 的方式升级下 kernel 代码，文件名称为 <code>openwrt-ramips-mt7688-widora1664-squashfs-sysupgrade.bin</code> .</p>
+<div class="language-text" data-ext="text" data-title="text"><pre class="language-text"><code>?       - alias for 'help'
+bootm   - boot application image from memory
+cp      - memory copy
+erase   - erase SPI FLASH memory
+go      - start application at address 'addr'
+help    - print online help
+loadb   - load binary file over serial line (kermit mode)
+md      - memory display
+mdio   - Ralink PHY register R/W command !!
+mm      - memory modify (auto-incrementing)
+nm      - memory modify (constant address)
+printenv- print environment variables
+reset   - Perform RESET of the CPU
+rf      - read/write rf register
+saveenv - save environment variables to persistent storage
+setenv  - set environment variables
+spi     - spi command
+tftpboot- boot image via network using TFTP protocol
+version - print monitor version
+</code></pre></div>]]></content:encoded>
+    </item>
     <item>
       <title></title>
       <link>https://newzone.top/protocol/linux/02_uboot.html</link>
@@ -55,7 +85,15 @@ Notes:Uboot firmware is uboot.bin NOT uboot.img
 </ol>
 <p>通过<code>make menuconfig</code> 进入配置界面，修改配置，将 DDR size 调整 512Mb, 也就是 64MB。
 <img src="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240826111036.png" alt="" loading="lazy"></p>
-]]></content:encoded>
+<h2>uboot 下命令行方式更新固件方式</h2>
+<div class="language-text" data-ext="text" data-title="text"><pre class="language-text"><code>Please choose the operation:
+   1: Load system code to SDRAM via TFTP.
+   2: Load system code then write to Flash via TFTP.
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial.
+   9: Load Boot Loader code then write to Flash via TFTP.
+</code></pre></div>]]></content:encoded>
       <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240826111036.png" type="image/png"/>
     </item>
     <item>
@@ -63,9 +101,17 @@ Notes:Uboot firmware is uboot.bin NOT uboot.img
       <link>https://newzone.top/protocol/linux/03_openwrt.html</link>
       <guid>https://newzone.top/protocol/linux/03_openwrt.html</guid>
       <source url="https://newzone.top/rss.xml"></source>
-      <description>feeds </description>
+      <description>feed 分区 编译生成文件 squashfs-sysupgrade.bin: sysupgrade 替换 linux 内核和 squash 文件系统，擦除整个 jffs2 部分。能保留配置文件，但不能保留二进制安装文件。 </description>
       <pubDate>Mon, 26 Aug 2024 11:05:20 GMT</pubDate>
-      <content:encoded><![CDATA[<h2>feeds</h2>
+      <content:encoded><![CDATA[<h2>feed</h2>
+<h2>分区</h2>
+<h2>编译生成文件</h2>
+<div class="language-text" data-ext="text" data-title="text"><pre class="language-text"><code>md5sums                              openwrt-ramips-mt7688-vmlinux.bin                         packages
+openwrt-ramips-mt7688-root.squashfs  openwrt-ramips-mt7688-vmlinux.elf                         sha256sums
+openwrt-ramips-mt7688-uImage.bin     openwrt-ramips-mt7688-WIDORA1664-squashfs-sysupgrade.bin
+</code></pre></div><ul>
+<li><strong>squashfs-sysupgrade.bin</strong>: sysupgrade 替换 linux 内核和 squash 文件系统，擦除整个 jffs2 部分。能保留配置文件，但不能保留二进制安装文件。</li>
+</ul>
 ]]></content:encoded>
     </item>
     <item>
@@ -147,15 +193,16 @@ Notes:Uboot firmware is uboot.bin NOT uboot.img
       <link>https://newzone.top/protocol/linux/00_mt7866.html</link>
       <guid>https://newzone.top/protocol/linux/00_mt7866.html</guid>
       <source url="https://newzone.top/rss.xml">初识</source>
-      <description>初识 从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能. 拿到 开发板 后，记录开机 log 如下。 flash &amp; RAM 大小 flash 分区 上面的分区中缺少从 0x50000 到 0x1...</description>
+      <description>初识 从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能。 拿到 开发板 后，记录开机 log 如下。 flash &amp; RAM 大小 flash 分区 上面的分区中缺少从 0x50000 到 0x1...</description>
       <pubDate>Sun, 25 Aug 2024 13:39:11 GMT</pubDate>
       <content:encoded><![CDATA[
-<p>从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能.</p>
-<p>拿到 <code>开发板</code> 后，记录开机 log 如下。</p>
+<p>从淘宝上找到一块 12 块钱的 linux 开发板，还带 WiFi 功能，拿回来玩一玩，计划学习 uboot，linux 设备树，适配 cat1.bis（合宙家） 的 usbnet 以及 PPP 拨号等功能。
+拿到 <code>开发板</code> 后，记录开机 log 如下。</p>
 <h2>flash &amp; RAM 大小</h2>
 <p>| 存储  | size  | 型号         |
 |</p>
 ]]></content:encoded>
+      <enclosure url="https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240827170203.png" type="image/png"/>
     </item>
     <item>
       <title></title>
