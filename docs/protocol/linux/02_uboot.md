@@ -56,3 +56,15 @@ Notes:Uboot firmware is uboot.bin NOT uboot.img
 
 通过`make menuconfig` 进入配置界面，修改配置，将 DDR size 调整 512Mb, 也就是 64MB。
 ![](https://raw.githubusercontent.com/tueo/cloudimg/main/img/20240826111036.png)
+
+## uboot 下命令行方式更新固件方式
+
+```
+Please choose the operation:
+   1: Load system code to SDRAM via TFTP.
+   2: Load system code then write to Flash via TFTP.
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial.
+   9: Load Boot Loader code then write to Flash via TFTP.
+```
