@@ -25,6 +25,8 @@ make download V=s
 
 ## 编译生成文件
 
+编译生成的文件在`bin/ramips/`路径下
+
 ```
 md5sums                              openwrt-ramips-mt7688-vmlinux.bin                         packages
 openwrt-ramips-mt7688-root.squashfs  openwrt-ramips-mt7688-vmlinux.elf                         sha256sums
