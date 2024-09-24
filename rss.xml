@@ -6,12 +6,53 @@
     <link>https://newzone.top/</link>
     <description>无聊的生活，需要找一些有意义的事情去度过</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 23 Sep 2024 05:16:24 GMT</pubDate>
-    <lastBuildDate>Mon, 23 Sep 2024 05:16:24 GMT</lastBuildDate>
+    <pubDate>Tue, 24 Sep 2024 03:27:09 GMT</pubDate>
+    <lastBuildDate>Tue, 24 Sep 2024 03:27:09 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>使用指南</category>
-    <category>工具</category>
+    <item>
+      <title></title>
+      <link>https://newzone.top/protocol/vscode.html</link>
+      <guid>https://newzone.top/protocol/vscode.html</guid>
+      <source url="https://newzone.top/rss.xml"></source>
+      <description>远程调试 在远程调试时，可能会遇到可执行文件需要 sudo 权限的情况，这时需要在 launch.json 中添加如下配置： 同时在项目文件夹根目录下增加gdb_root.sh clangd 插件 微软提供的 c 插件智能感知能力有时存在问题，可以使用 clangd 替代，该插件依赖 cmake 构建提供的compile_commands.json文件...</description>
+      <pubDate>Tue, 24 Sep 2024 03:26:12 GMT</pubDate>
+      <content:encoded><![CDATA[<h2>远程调试</h2>
+<p>在远程调试时，可能会遇到可执行文件需要 sudo 权限的情况，这时需要在 launch.json 中添加如下配置：</p>
+<div class="language-json" data-ext="json" data-title="json"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"sudo myapp"</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
+            <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build/exe"</span><span class="token punctuation">,</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>
+            <span class="token property">"environment"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"miDebuggerPath"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/gdb_root.sh"</span><span class="token punctuation">,</span>
+            <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>同时在项目文件夹根目录下增加<code>gdb_root.sh</code></p>
+<div class="language-bash" data-ext="sh" data-title="sh"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">SELF_PATH</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>realpath <span class="token parameter variable">-s</span> <span class="token string">"<span class="token variable">$0</span>"</span><span class="token variable">)</span></span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$SUDO_ASKPASS</span>"</span> <span class="token operator">=</span> <span class="token string">"<span class="token variable">$SELF_PATH</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token function">zenity</span> <span class="token parameter variable">--password</span> <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$1</span>"</span>
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">exec</span> <span class="token function">env</span> <span class="token assign-left variable">SUDO_ASKPASS</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$SELF_PATH</span>"</span> <span class="token function">sudo</span> <span class="token parameter variable">-A</span> /usr/bin/gdb <span class="token variable">$@</span>
+<span class="token keyword">fi</span>
+</code></pre></div><h2>clangd 插件</h2>
+<p>微软提供的 c 插件智能感知能力有时存在问题，可以使用 clangd 替代，该插件依赖 cmake 构建提供的<code>compile_commands.json</code>文件。
+该插件和微软的 c 插件存在冲突，可以通过如下配置关闭 c 插件的智能感知功能</p>
+<div class="language-json" data-ext="json" data-title="json"><pre class="language-json"><code><span class="token property">"C_Cpp.intelliSenseEngine"</span><span class="token operator">:</span> <span class="token string">"disabled"</span>
+</code></pre></div>]]></content:encoded>
+    </item>
     <item>
       <title>Updating the Linux Image</title>
       <link>https://newzone.top/protocol/linux/01_update_img.html</link>
@@ -121,6 +162,7 @@ b. 下载过程中如果出现 <code>fatal: unable to connect to github.com:gith
 </blockquote>
 <h2>分区</h2>
 <h2>编译生成文件</h2>
+<p>编译生成的文件在<code>bin/ramips/</code>路径下</p>
 <div class="language-text" data-ext="text" data-title="text"><pre class="language-text"><code>md5sums                              openwrt-ramips-mt7688-vmlinux.bin                         packages
 openwrt-ramips-mt7688-root.squashfs  openwrt-ramips-mt7688-vmlinux.elf                         sha256sums
 openwrt-ramips-mt7688-uImage.bin     openwrt-ramips-mt7688-WIDORA1664-squashfs-sysupgrade.bin
@@ -339,17 +381,6 @@ openwrt-ramips-mt7688-uImage.bin     openwrt-ramips-mt7688-WIDORA1664-squashfs-s
       <description>博客文章内容，支持 Markdown 和 HTML 语言。 </description>
       <category>使用指南</category>
       <pubDate>Fri, 01 Mar 2024 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<p>博客文章内容，支持 Markdown 和 HTML 语言。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>博客文章样例2</title>
-      <link>https://newzone.top/posts/2024-03-02-blog_example2.html</link>
-      <guid>https://newzone.top/posts/2024-03-02-blog_example2.html</guid>
-      <source url="https://newzone.top/rss.xml">博客文章样例2</source>
-      <description>博客文章内容，支持 Markdown 和 HTML 语言。 </description>
-      <category>工具</category>
-      <pubDate>Sat, 02 Mar 2024 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<p>博客文章内容，支持 Markdown 和 HTML 语言。</p>
 ]]></content:encoded>
     </item>
